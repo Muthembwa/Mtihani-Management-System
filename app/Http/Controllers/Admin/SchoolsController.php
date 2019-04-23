@@ -22,7 +22,6 @@ class SchoolsController extends Controller
             return abort(401);
         }
 
-
                 $schools = schools::all();
 
         return view('admin.schools.index', compact('schools'));
@@ -55,7 +54,7 @@ class SchoolsController extends Controller
         if (! Gate::allows('school_create')) {
             return abort(401);
         }
-        $school = School::create($request->all());
+        $school = schools::create($request->all());
 
 
 
@@ -77,7 +76,7 @@ class SchoolsController extends Controller
         
         $roles = \App\Role::get()->pluck('title', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
-        $school = School::findOrFail($id);
+        $school = schools::findOrFail($id);
 
         return view('admin.schools.edit', compact('school', 'roles'));
     }
@@ -94,7 +93,7 @@ class SchoolsController extends Controller
         if (! Gate::allows('school_edit')) {
             return abort(401);
         }
-        $school = School::findOrFail($id);
+        $school = schools::findOrFail($id);
         $school->update($request->all());
 
   
@@ -117,7 +116,7 @@ class SchoolsController extends Controller
         
         $roles = \App\Role::get()->pluck('title', 'id')->prepend(trans('quickadmin.qa_please_select'), '');$streams = \App\Stream::where('class_teacher_id', $id)->get();$subjects = \App\Subject::where('subject_teacher_id', $id)->get();
 
-        $school = School::findOrFail($id);
+        $school = schools::findOrFail($id);
 
         return view('admin.schools.show', compact('school', 'streams', 'subjects'));
     }
@@ -134,7 +133,7 @@ class SchoolsController extends Controller
         if (! Gate::allows('school_delete')) {
             return abort(401);
         }
-        $school = School::findOrFail($id);
+        $school = schools::findOrFail($id);
         $school->delete();
 
         return redirect()->route('admin.schools.index');
@@ -151,7 +150,7 @@ class SchoolsController extends Controller
             return abort(401);
         }
         if ($request->input('ids')) {
-            $entries = School::whereIn('id', $request->input('ids'))->get();
+            $entries = schools::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();

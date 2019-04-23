@@ -1,13 +1,13 @@
 <?php
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\schools as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Hash;
 
 /**
- * Class School
+ * Class schools
  *
  * @package App
  * @property string $school Name
@@ -17,7 +17,7 @@ use Hash;
  * @property string $password
  * @property string $remember_token
 */
-class School extends Authenticatable
+class schools extends Authenticatable
 {
     use Notifiable;
     protected $fillable = ['school_name', 'county', 'subcounty', 'email', 'password', 'remember_token'];
